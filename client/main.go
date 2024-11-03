@@ -13,19 +13,17 @@ import (
 )
 
 type CotacaoAPIResponse struct {
-	USDBRL struct {
-		Code       string `json:"code"`
-		Codein     string `json:"codein"`
-		Name       string `json:"name"`
-		High       string `json:"high"`
-		Low        string `json:"low"`
-		VarBid     string `json:"varBid"`
-		PctChange  string `json:"pctChange"`
-		Bid        string `json:"bid"`
-		Ask        string `json:"ask"`
-		Timestamp  string `json:"timestamp"`
-		CreateDate string `json:"create_date"`
-	} `json:"USDBRL"`
+	Code       string `json:"code"`
+	Codein     string `json:"codein"`
+	Name       string `json:"name"`
+	High       string `json:"high"`
+	Low        string `json:"low"`
+	VarBid     string `json:"varBid"`
+	PctChange  string `json:"pctChange"`
+	Bid        string `json:"bid"`
+	Ask        string `json:"ask"`
+	Timestamp  string `json:"timestamp"`
+	CreateDate string `json:"create_date"`
 }
 
 func main() {
@@ -38,7 +36,7 @@ func main() {
 		return
 	}
 
-	conteudo := fmt.Sprintf("Dólar: %s\n", cotacao.USDBRL.Bid)
+	conteudo := fmt.Sprintf("Dólar: %s\n", cotacao.Bid)
 	f, err := os.OpenFile("cotacao.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		log.Println("Erro ao abrir arquivo de cotações:", err)
@@ -77,7 +75,6 @@ func BuscaCotacao(ctx context.Context) (*CotacaoAPIResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	var cotacao CotacaoAPIResponse
 	err = json.Unmarshal(body, &cotacao)
 	if err != nil {
